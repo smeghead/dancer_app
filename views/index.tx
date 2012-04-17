@@ -1,0 +1,8 @@
+
+<div id="page">
+<ul>
+: for $rows -> $row {
+  <li><: $row.title :> : <: $row.category_name :></li>
+: }
+</ul>
+</div>
