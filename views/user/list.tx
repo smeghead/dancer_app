@@ -1,0 +1,18 @@
+<div id="page">
+  <h1>User list</h1>
+  <a href="<: $request.uri_base :>/user/add">register new user</a>
+  <table>
+    <tr>
+      <th>name</th>
+      <th>email</th>
+      <th>type</th>
+    </tr>
+  : for $rows -> $row {
+    <tr>
+      <td><: $row.name :></td>
+      <td><: $row.email :></td>
+      <td><: $row.user_type :></td>
+    </tr>
+  : }
+  </table>
+</div>

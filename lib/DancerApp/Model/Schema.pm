@@ -8,19 +8,23 @@ __PACKAGE__->load_schema;
 
 __END__
 
-CREATE TABLE entries (
+CREATE TABLE users (
   id integer primary key not null,
-  title varchar,
-  category_id integer,
+  name varchar,
+  email varchar,
+  user_type_id integer,
   created_at datetime,
   updated_at datetime
 );
-CREATE TABLE categories (
+insert into users (name, email, user_type_id, created_at, updated_at)
+values ('Jack Shephard', 'jack@example.com', 3, current_timestamp, current_timestamp);
+
+CREATE TABLE user_types (
   id integer primary key not null,
   name varchar,
   created_at datetime,
   updated_at datetime
 );
-insert into categories (name, created_at, updated_at) values ('dance', current_datetime, current_datetime);
-insert into categories (name, created_at, updated_at) values ('xslate', current_datetime, current_datetime);
-insert into categories (name, created_at, updated_at) values ('skinny', current_datetime, current_datetime);
+insert into user_types (name, created_at, updated_at) values ('normal', current_timestamp, current_timestamp);
+insert into user_types (name, created_at, updated_at) values ('premium', current_timestamp, current_timestamp);
+insert into user_types (name, created_at, updated_at) values ('administrator', current_timestamp, current_timestamp);

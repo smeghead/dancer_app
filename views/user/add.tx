@@ -1,0 +1,19 @@
+<div id="page">
+  <h1>New User</h1>
+  <form action="<: $request.base :>" method="post">
+    <div>name</div>
+    <input type="text" name="name" id="name" />
+    <div>email</div>
+    <input type="email" name="email" id="email" />
+    <div>user type</div>
+    <select name="user_type_id" id="user_type_id">
+      <option>please select...</option>
+      : for $user_types -> $type {
+        <option value="<: $type.id :>"><: $type.name :></option>
+      : }
+    </select>
+    <div>
+      <input type="submit" value="create" />
+    </div>
+  </form>
+</div>

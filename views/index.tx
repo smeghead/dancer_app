@@ -1,8 +1,7 @@
 
 <div id="page">
-<ul>
-: for $rows -> $row {
-  <li><: $row.title :> : <: $row.category_name :></li>
-: }
-</ul>
+  <h1>dancer app</h1>
+  <ul>
+    <li><a href="<: $request.uri_base :>/user/">User Management</a></li>
+  </ul>
 </div>
