@@ -1,7 +1,7 @@
 <div id="page">
   <h1><: 'New User' :></h1>
-  : block form | fillinform($params) -> {
-  <form action="<: $request.base :>user/add" method="post">
+  : block form | fillinform($request.method == 'POST' ? $params : $user || {}) -> {
+  <form action="" method="post">
     <div>name</div>
     <input type="text" name="name" id="name" />
     <span class="error"><: $flash.err_name :></span>
@@ -17,8 +17,13 @@
     </select>
     <span class="error"><: $flash.err_user_type_id :></span>
     <div>
-      <input type="submit" value="create" />
+      : if $user {
+        <input type="submit" value="update" />
+      : } else {
+        <input type="submit" value="create" />
+      : }
     </div>
   </form>
   : }
+  <a href="<: $request.base :>user">back</a>
 </div>

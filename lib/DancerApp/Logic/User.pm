@@ -27,4 +27,18 @@ sub register {
     return $self->schema->insert('users', $user);
 }
 
+sub update {
+    my ($self, $id, $user) = @_;
+    $self->log->debug('enter update');
+    die 'required param: id.' unless $id;
+
+    return $self->schema->update('users', $user, {id => $id});
+}
+
+sub find {
+    my ($self, $id) = @_;
+    $self->log->debug('enter find');
+    return $self->schema->single('users', {id => $id});
+}
+
 1;

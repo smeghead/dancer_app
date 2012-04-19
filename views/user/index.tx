@@ -15,7 +15,7 @@
     </tr>
   : for $rows -> $row {
     <tr>
-      <td><: $row.name :></td>
+      <td><a href="<: $request.base :>user/edit/<: $row.id :>"><: $row.name :></a></td>
       <td><: $row.email :></td>
       <td><: $row.user_type :></td>
     </tr>
