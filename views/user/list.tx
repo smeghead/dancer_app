@@ -1,5 +1,11 @@
 <div id="page">
   <h1>User list</h1>
+  : my $message = $flash.message;
+  : if $message {
+  <div class="message">
+    <: $message :>
+  </div>
+  : }
   <a href="<: $request.uri_base :>/user/add">register new user</a>
   <table>
     <tr>

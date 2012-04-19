@@ -26,11 +26,26 @@ charset: "UTF-8"
 #     start_tag: '[%'
 #     end_tag:   '%]'
 
-template: xslate
+template: xslatefillinform
+
 engines:
-  xslate:
+  xslatefillinform:
     cache_dir: .xslate_cache/
     cache:     1
     extension: tx
     module:
       - Text::Xslate::Bridge::TT2Like
+
+session: simple
+
+plugins:
+  ValidateTiny:
+    rules_dir: validation
+    error_prefix: err_
+    is_full: 0
+  I18N:
+    func: "_"
+    lang_default: en
+    maketext_options:
+      Decode: 0
+

@@ -1,19 +1,24 @@
 <div id="page">
-  <h1>New User</h1>
-  <form action="<: $request.base :>" method="post">
+  <h1><: 'New User' :></h1>
+  : block form | fillinform($params) -> {
+  <form action="<: $request.base :>user/add" method="post">
     <div>name</div>
     <input type="text" name="name" id="name" />
+    <span class="error"><: $flash.err_name :></span>
     <div>email</div>
     <input type="email" name="email" id="email" />
+    <span class="error"><: $flash.err_email :></span>
     <div>user type</div>
     <select name="user_type_id" id="user_type_id">
-      <option>please select...</option>
+      <option value="">please select...</option>
       : for $user_types -> $type {
         <option value="<: $type.id :>"><: $type.name :></option>
       : }
     </select>
+    <span class="error"><: $flash.err_user_type_id :></span>
     <div>
       <input type="submit" value="create" />
     </div>
   </form>
+  : }
 </div>
