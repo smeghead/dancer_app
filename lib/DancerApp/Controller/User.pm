@@ -1,6 +1,7 @@
 package DancerApp::Controller::User;
 use Dancer ':syntax';
 use Dancer::Plugin::ValidateTiny;
+use Dancer::Plugin::I18N;
 use DancerApp::Plugin::FlashMessage;
 use DancerApp::Plugin::Logic;
 
@@ -15,6 +16,7 @@ get '/' => sub {
 get '/add' => sub {
     my $logic = logic('User');
     my $user_types = $logic->user_types;
+
     template 'user/add', {user_types => $user_types};
 };
 

@@ -1,4 +1,5 @@
 <div id="page">
+  <: $_('Hello Dancer') :>
   <h1><: 'New User' :></h1>
   : block form | fillinform($request.method == 'POST' ? $params : $user || {}) -> {
   <form action="" method="post">

@@ -45,7 +45,8 @@ plugins:
     is_full: 0
   I18N:
     func: "_"
-    lang_default: en
+    lang_default: ja
     maketext_options:
+      Style: Gettext
       Decode: 0
 
