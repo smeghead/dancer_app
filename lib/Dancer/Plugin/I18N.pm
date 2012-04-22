@@ -253,9 +253,7 @@ When you set LC_TIME and use time function for print day name or month name, the
 	my $languages_list = {};
 	if (opendir my $langdir, $lang_path) {
 		foreach my $entry (readdir $langdir) {
-            debug $entry;
 			next unless $entry =~ m/\A (\w+)\.(?:pm|po|mo) \z/xms;
-            debug 'exists!';
 			my $langtag = $1;
 			next if $langtag eq "i_default";
 			my $language_tag = $langtag;
@@ -482,9 +480,6 @@ sub _localize {
 	no strict 'refs';
 	my $c = __PACKAGE__;
 	return &{ $c . '::_loc' }( $_[0], @{ $_[1] } ) if ( ref $_[1] eq 'ARRAY' );
-    debug Dumper '**************';
-    debug Dumper $c . '::_loc';
-    debug Dumper @_;
 	return &{ $c . '::_loc' }(@_);
 }
 

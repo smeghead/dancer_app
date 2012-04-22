@@ -40,17 +40,26 @@ register flash => sub ($;$) {
     return $value;
 };
 
-use Data::Dumper;
+register flash_errors => sub {
+    my ($errors) = @_;
+
+    my $flash = session($session_hash_key) || {};
+
+    for my $m (keys %$errors) {
+        next unless $m =~ m{^err_};
+        $flash->{$m} = $errors->{$m};
+    }
+    session $session_hash_key, $flash;
+};
+
 hook before_template => sub {
-    my $x = shift;
-    $x->{$token_name} = {  map { my $key = $_;
+    shift->{$token_name} = {  map { my $key = $_;
                                  my $flash = session($session_hash_key) || {};
                                  my $value = delete $flash->{$key};
                                  session $session_hash_key, $flash;
                                  ( $key, $value );
                                 } ( keys %{session($session_hash_key) || {} })
                            };
-    debug Dumper($x->{$token_name});
 };
 
 register_plugin;

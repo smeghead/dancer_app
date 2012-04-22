@@ -27,13 +27,8 @@ post '/add' => sub {
     # validation
     my $validation = validator $params, 'user.pl';
     unless ($validation->{valid}) {
-        my $errors = $validation->{result};
-        for my $m (keys %$errors) {
-            next unless $m =~ m{^err_};
-            flash $m => $errors->{$m};
-        }
-        my $user_types = $logic->user_types;
-        return template 'user/add', {user_types => $user_types};
+        flash_errors $validation->{result};
+        return forward '/user/add', {}, {method => 'GET'};
     }
 
     my $user = {
@@ -70,13 +65,8 @@ post '/edit/:id' => sub {
     # validation
     my $validation = validator $params, 'user.pl';
     unless ($validation->{valid}) {
-        my $errors = $validation->{result};
-        for my $m (keys %$errors) {
-            next unless $m =~ m{^err_};
-            flash $m => $errors->{$m};
-        }
-        my $user_types = $logic->user_types;
-        return template 'user/add', {user_types => $user_types};
+        flash_errors $validation->{result};
+        return forward '/user/edit/' . $id, {}, {method => 'GET'};
     }
 
     my $user = {
