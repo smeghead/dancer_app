@@ -1,7 +1,8 @@
 <div id="page">
   <: $_('Hello Dancer') :>
+  <: $request.method :>
   <h1><: 'New User' :></h1>
-  : block form | fillinform($request.method == 'POST' ? $params : $user || {}) -> {
+  : block form | fillinform($flash.has_errors ? $params : $user || {}) -> {
   <form action="" method="post">
     <div>name</div>
     <input type="text" name="name" id="name" />

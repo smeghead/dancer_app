@@ -1,0 +1,9 @@
+#!/bin/sh
+D=$(cd $(dirname $0);pwd;cd - >/dev/null)
+echo $D
+LOCALES="ja en"
+
+for locale in $LOCALES; do
+    echo merge $locale.po
+    xgettext.pl -d $locale -p $D/../I18N -D $D/../views/
+done;

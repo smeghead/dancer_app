@@ -52,14 +52,30 @@ register flash_errors => sub {
     session $session_hash_key, $flash;
 };
 
+register flash_has_errors => sub {
+    my ($errors) = @_;
+
+    my $flash = session($session_hash_key) || {};
+
+    for my $m (keys %$errors) {
+        next unless $m =~ m{^err_};
+        return 1;
+    }
+    return 0;
+};
+
 hook before_template => sub {
-    shift->{$token_name} = {  map { my $key = $_;
+    my $self = shift;
+    my $has_errors = 0;
+    $self->{$token_name} = {  map { my $key = $_;
+                                 $has_errors = 1 if $key =~ m{^err_};
                                  my $flash = session($session_hash_key) || {};
                                  my $value = delete $flash->{$key};
                                  session $session_hash_key, $flash;
                                  ( $key, $value );
                                 } ( keys %{session($session_hash_key) || {} })
                            };
+    $self->{$token_name}->{has_errors} = $has_errors;
 };
 
 register_plugin;
